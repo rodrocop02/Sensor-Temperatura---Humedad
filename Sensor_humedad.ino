@@ -14,9 +14,12 @@ int sensor=9;
 int temperatura;
 int humedad;
 
+
 DHT dht(sensor,DHT11);
 
 void setup() {
+  pinMode(sensor,INPUT);
+
   Serial.begin(9600);
   lcd.begin(16,2);
   dht.begin();
@@ -33,6 +36,8 @@ void loop() {
   lcd.print("Humedad: ");
   lcd.print(humedad);
 
+
+  // Lee el valor de la temperatura y lo envía a Processing a través del puerto serie
   Serial.println(temperatura);
-  Serial.println(".");
+  delay(100); // Pequeña pausa para evitar una transmisión muy rápida de datos por el puerto serie
 }
